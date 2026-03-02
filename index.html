@@ -1,0 +1,2624 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Portfolio</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* ===== RESET & VARIABLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Dark Mode (Default) */
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #050505;
+            --bg-card: #141414;
+            --bg-card-hover: #1a1a1a;
+            --bg-gradient: linear-gradient(135deg, #0a0a0a 0%, #141414 100%);
+            --text-primary: #ffffff;
+            --text-secondary: #a3a3a3;
+            --text-muted: #6b6b6b;
+            --accent: #8b5cf6;
+            --accent-secondary: #ec4899;
+            --accent-glow: rgba(139, 92, 246, 0.25);
+            --border: #262626;
+            --border-hover: #404040;
+            --card-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.5);
+            --gradient-1: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+            --gradient-2: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            --transition: all 0.4s cubic-bezier(0.15, 0.75, 0.3, 1);
+        }
+
+        /* Light Mode Variables */
+        body.light-mode {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #f1f5f9;
+            --bg-card: #ffffff;
+            --bg-card-hover: #f8fafc;
+            --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-muted: #64748b;
+            --accent: #8b5cf6;
+            --accent-secondary: #ec4899;
+            --accent-glow: rgba(139, 92, 246, 0.15);
+            --border: #e2e8f0;
+            --border-hover: #cbd5e1;
+            --card-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ===== CUSTOM CURSOR - HIDE ON MOBILE ===== */
+        @media (min-width: 992px) {
+            .cursor {
+                width: 10px;
+                height: 10px;
+                background: var(--accent);
+                border-radius: 50%;
+                position: fixed;
+                pointer-events: none;
+                z-index: 9999;
+                mix-blend-mode: difference;
+                transition: transform 0.2s ease;
+                transform: translate(-50%, -50%);
+            }
+
+            .cursor-follower {
+                width: 30px;
+                height: 30px;
+                border: 2px solid var(--accent);
+                border-radius: 50%;
+                position: fixed;
+                pointer-events: none;
+                z-index: 9998;
+                transition: transform 0.4s ease, width 0.3s, height 0.3s, border-color 0.3s;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 0.8rem 0;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            background: var(--bg-secondary);
+            border-bottom-color: var(--accent);
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+            line-height: 1;
+        }
+
+        @media (min-width: 768px) {
+            .navbar-brand {
+                font-size: 1.8rem;
+            }
+        }
+
+        .nav-links {
+            display: none;
+        }
+
+        @media (min-width: 992px) {
+            .nav-links {
+                display: flex;
+                gap: 2rem;
+                align-items: center;
+                margin-left: 2rem;
+            }
+
+            .nav-links a {
+                color: var(--text-primary);
+                text-decoration: none;
+                font-weight: 500;
+                transition: color 0.3s;
+                position: relative;
+                font-size: 0.95rem;
+            }
+
+            .nav-links a::after {
+                content: '';
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: var(--gradient-1);
+                transition: width 0.3s;
+            }
+
+            .nav-links a:hover::after {
+                width: 100%;
+            }
+        }
+
+        .mode-toggle {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-left: auto;
+        }
+
+        @media (min-width: 768px) {
+            .mode-toggle {
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        .mode-toggle:hover {
+            border-color: var(--accent);
+            transform: rotate(15deg);
+            background: var(--accent-glow);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .hero {
+                min-height: 700px;
+            }
+        }
+
+        #canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding-top: 60px;
+            width: 100%;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s ease forwards;
+        }
+
+        @media (min-width: 480px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .hero-title {
+                font-size: 4rem;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .hero-title {
+                font-size: 5rem;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .hero-title {
+                font-size: 7rem;
+            }
+        }
+
+        .hero-title .accent {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s ease 0.2s forwards;
+        }
+
+        @media (min-width: 768px) {
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s ease 0.4s forwards;
+        }
+
+        @media (min-width: 768px) {
+            .hero-stats {
+                gap: 3rem;
+            }
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @media (min-width: 768px) {
+            .stat-item h3 {
+                font-size: 2.5rem;
+            }
+        }
+
+        .stat-item p {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+        }
+
+        @media (min-width: 768px) {
+            .stat-item p {
+                font-size: 0.9rem;
+            }
+        }
+
+        .scroll-indicator {
+            display: none;
+        }
+
+        @media (min-width: 992px) {
+            .scroll-indicator {
+                display: block;
+                position: absolute;
+                bottom: 40px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 2;
+                color: var(--text-secondary);
+                font-size: 0.8rem;
+                letter-spacing: 2px;
+                writing-mode: vertical-rl;
+                animation: bounce 2s infinite;
+            }
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            40% {
+                transform: translateX(-50%) translateY(-20px);
+            }
+
+            60% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+        }
+
+        /* ===== SECTION STYLES ===== */
+        .section-padding {
+            padding: 3rem 0;
+        }
+
+        @media (min-width: 768px) {
+            .section-padding {
+                padding: 4rem 0;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .section-padding {
+                padding: 6rem 0;
+            }
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .section-header {
+                margin-bottom: 3rem;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .section-header {
+                margin-bottom: 4rem;
+            }
+        }
+
+        .section-header h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        @media (min-width: 768px) {
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .section-header h2 {
+                font-size: 2.5rem;
+            }
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            background: var(--gradient-1);
+            border-radius: 3px;
+        }
+
+        @media (min-width: 768px) {
+            .section-header h2::after {
+                width: 50px;
+            }
+        }
+
+        .section-header .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .section-header .subtitle {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* ===== FILTER SECTION ===== */
+        .filter-section {
+            padding: 1rem 0 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        @media (min-width: 768px) {
+            .filter-section {
+                padding: 2rem 0 0;
+            }
+        }
+
+        .filter-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            padding: 0 1rem;
+        }
+
+        @media (min-width: 480px) {
+            .filter-controls {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.75rem;
+                padding: 0;
+            }
+        }
+
+        .filter-btn {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            padding: 0.7rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+        }
+
+        @media (min-width: 480px) {
+            .filter-btn {
+                width: auto;
+                padding: 0.7rem 1.5rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .filter-btn {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -10px var(--accent);
+        }
+
+        .filter-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* ===== PROJECT GRID ===== */
+        .projects-grid {
+            padding: 1.5rem 0 2.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .projects-grid {
+                padding: 2rem 0 3rem;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .projects-grid {
+                padding: 2rem 0 4rem;
+            }
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            position: relative;
+            cursor: pointer;
+            box-shadow: var(--card-shadow);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:active {
+            transform: scale(0.98);
+        }
+
+        @media (min-width: 992px) {
+            .project-card:hover {
+                transform: translateY(-10px) scale(1.02);
+                border-color: var(--accent);
+                box-shadow: var(--shadow-lg), 0 0 30px var(--accent-glow);
+            }
+        }
+
+        .card-media {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+        }
+
+        .card-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s;
+        }
+
+        @media (min-width: 992px) {
+            .project-card:hover .card-media img {
+                transform: scale(1.1);
+            }
+        }
+
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+            opacity: 0;
+            transition: var(--transition);
+            display: flex;
+            align-items: flex-end;
+            padding: 1.2rem;
+        }
+
+        @media (min-width: 992px) {
+            .project-card:hover .card-overlay {
+                opacity: 1;
+            }
+        }
+
+        .card-info {
+            padding: 1.2rem;
+        }
+
+        @media (min-width: 768px) {
+            .card-info {
+                padding: 1.5rem;
+            }
+        }
+
+        .card-info h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        @media (min-width: 768px) {
+            .card-info h3 {
+                font-size: 1.3rem;
+            }
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .tech-tags span {
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--accent);
+            padding: 0.25rem 0.6rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        @media (min-width: 768px) {
+            .tech-tags span {
+                font-size: 0.8rem;
+                padding: 0.3rem 0.8rem;
+            }
+        }
+
+        .view-project {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .view-project i {
+            transition: transform 0.3s;
+        }
+
+        .view-project:hover i {
+            transform: translateX(5px);
+        }
+
+        /* ===== SKILLS SECTION ===== */
+        .skills-section {
+            background: var(--bg-secondary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skills-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+
+        .skill-category {
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .skill-category {
+                margin-bottom: 3rem;
+            }
+        }
+
+        .skill-category h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            color: var(--text-primary);
+        }
+
+        @media (min-width: 768px) {
+            .skill-category h3 {
+                font-size: 1.5rem;
+                margin-bottom: 2rem;
+            }
+        }
+
+        .skill-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        @media (min-width: 768px) {
+            .skill-items {
+                gap: 1rem;
+            }
+        }
+
+        .skill-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+            font-size: 0.85rem;
+        }
+
+        @media (min-width: 768px) {
+            .skill-item {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+
+        .skill-item:hover {
+            border-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px -10px var(--accent);
+        }
+
+        .skill-item i {
+            color: var(--accent);
+            font-size: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .skill-item i {
+                font-size: 1.2rem;
+            }
+        }
+
+        .skill-item span {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* ===== COLLABORATIONS SECTION ===== */
+        .collaborations-section {
+            background: var(--bg-primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .collaborations-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        }
+
+        .doctor-card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .doctor-card {
+                padding: 2rem 1.5rem;
+                border-radius: 24px;
+            }
+        }
+
+        .doctor-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transition: transform 0.6s;
+        }
+
+        @media (min-width: 992px) {
+            .doctor-card:hover {
+                transform: translateY(-10px);
+                border-color: var(--accent);
+                box-shadow: var(--shadow-lg);
+            }
+
+            .doctor-card:hover::before {
+                transform: scaleX(1);
+            }
+        }
+
+        .doctor-img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 1rem;
+            border: 3px solid var(--accent);
+            padding: 3px;
+        }
+
+        @media (min-width: 768px) {
+            .doctor-img {
+                width: 120px;
+                height: 120px;
+                margin: 0 auto 1.5rem;
+            }
+        }
+
+        .doctor-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            transition: transform 0.6s;
+        }
+
+        @media (min-width: 992px) {
+            .doctor-card:hover .doctor-img img {
+                transform: scale(1.1);
+            }
+        }
+
+        .doctor-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--text-primary);
+        }
+
+        @media (min-width: 768px) {
+            .doctor-card h4 {
+                font-size: 1.2rem;
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        .specialization {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+
+        @media (min-width: 768px) {
+            .specialization {
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+            }
+        }
+
+        .doc-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: gap 0.3s;
+        }
+
+        @media (min-width: 768px) {
+            .doc-link {
+                font-size: 1rem;
+            }
+        }
+
+        .doc-link:hover {
+            gap: 1rem;
+            color: var(--accent-secondary);
+        }
+
+        /* ===== FAQ SECTION ===== */
+        .faq-section {
+            background: var(--bg-secondary);
+        }
+
+        .accordion-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px !important;
+            margin-bottom: 0.8rem;
+            overflow: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .accordion-item {
+                margin-bottom: 1rem;
+            }
+        }
+
+        .accordion-button {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            font-weight: 600;
+            padding: 1rem;
+            font-size: 0.95rem;
+            box-shadow: none !important;
+        }
+
+        @media (min-width: 768px) {
+            .accordion-button {
+                padding: 1.5rem;
+                font-size: 1.1rem;
+            }
+        }
+
+        .accordion-button:not(.collapsed) {
+            background: var(--accent-glow);
+            color: var(--accent);
+        }
+
+        .accordion-button::after {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%238b5cf6' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+            background-size: 12px;
+        }
+
+        @media (min-width: 768px) {
+            .accordion-button::after {
+                background-size: 16px;
+            }
+        }
+
+        .accordion-body {
+            padding: 1rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 768px) {
+            .accordion-body {
+                padding: 1.5rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* ===== MODAL ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: block;
+        }
+
+        .modal-content {
+            max-width: 1200px;
+            margin: 60px 15px 30px;
+            padding: 1.5rem;
+            position: relative;
+            animation: modalFadeIn 0.5s;
+            background: var(--bg-primary);
+            border-radius: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .modal-content {
+                margin: 50px auto;
+                padding: 2rem;
+                border-radius: 24px;
+            }
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-modal {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (min-width: 768px) {
+            .close-modal {
+                top: 30px;
+                right: 30px;
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+        }
+
+        .close-modal:hover {
+            transform: rotate(90deg);
+            border-color: var(--accent);
+        }
+
+        .close-modal:active {
+            transform: scale(0.9);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--bg-secondary);
+            padding: 2.5rem 0 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        @media (min-width: 768px) {
+            .footer {
+                padding: 4rem 0 2rem;
+            }
+        }
+
+        .footer-brand {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.8rem;
+            display: inline-block;
+        }
+
+        @media (min-width: 768px) {
+            .footer-brand {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            max-width: 300px;
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-text {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        @media (min-width: 768px) {
+            .social-links {
+                gap: 1rem;
+            }
+        }
+
+        .social-link {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 768px) {
+            .social-link {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
+
+        .social-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .social-link:active {
+            transform: scale(0.9);
+        }
+
+        .footer-links h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        @media (min-width: 768px) {
+            .footer-links h4 {
+                font-size: 1.2rem;
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.6rem;
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-links li {
+                margin-bottom: 0.8rem;
+                font-size: 1rem;
+            }
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-links a:active {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        @media (min-width: 768px) {
+            .footer-bottom {
+                margin-top: 3rem;
+                padding-top: 2rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* ===== UTILITY CLASSES ===== */
+        .container {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        @media (min-width: 576px) {
+            .container {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+        }
+
+        .row {
+            margin-left: -0.5rem;
+            margin-right: -0.5rem;
+        }
+
+        .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12,
+        .col, .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12,
+        .col-sm, .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12,
+        .col-md, .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12,
+        .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12,
+        .col-xl, .col-xl-auto {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+        }
+
+        .g-4, .gy-4 {
+            --bs-gutter-y: 1rem;
+        }
+
+        @media (min-width: 768px) {
+            .g-4, .gy-4 {
+                --bs-gutter-y: 1.5rem;
+            }
+        }
+
+        /* Touch-friendly tap targets */
+        button, 
+        a, 
+        .filter-btn, 
+        .project-card, 
+        .doctor-card, 
+        .skill-item, 
+        .social-link {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Hide cursor on mobile */
+        @media (max-width: 991px) {
+            .cursor,
+            .cursor-follower {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="dark-mode">
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Portfolio</a>
+            <div class="nav-links">
+                <a href="#work">Work</a>
+                <a href="#skills">Skills</a>
+                <a href="#collaborations">Collaborations</a>
+            </div>
+            <div class="ms-auto d-flex align-items-center gap-3">
+                <button class="mode-toggle" id="darkModeToggle">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun" style="display: none;"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with 3D Canvas -->
+    <section class="hero" id="home">
+        <div id="canvas-container"></div>
+        <div class="container hero-content">
+            <div class="row">
+                <div class="col-12 col-lg-10">
+                    <h1 class="hero-title">
+                        Code <span class="accent">&</span><br>Creative Excellence
+                    </h1>
+                    <p class="hero-subtitle">
+                        Web Development · Graphic Design · Interactive Experiences
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <h3>50+</h3>
+                            <p>PROJECTS COMPLETED</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>4+</h3>
+                            <p>YEARS EXPERIENCE</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>15+</h3>
+                            <p>MEDICAL PARTNERS</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">SCROLL</div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section" id="work">
+        <div class="container">
+            <div class="filter-controls">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="web">Web Development</button>
+                <button class="filter-btn" data-filter="design">Graphic Design</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="projects-grid">
+        <div class="container">
+            <div class="row g-4" id="projectsContainer">
+                <!-- Web Development Projects -->
+                <div class="col-12 col-sm-6 col-lg-4 project-item" data-category="web">
+                    <div class="project-card" data-project="1">
+                        <div class="card-media">
+                            <img src="./img/10.png" alt="Web Project" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="view-project" onclick="openModal(1); return false;">
+                                    View Case Study <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h3>Doctor's Business Website</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4 project-item" data-category="web">
+                    <div class="project-card" data-project="2">
+                        <div class="card-media">
+                            <img src="./img/11.png" alt="E-commerce" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="view-project" onclick="openModal(2); return false;">
+                                    View Case Study <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h3>Doctor's Business Website</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4 project-item" data-category="web">
+                    <div class="project-card" data-project="3">
+                        <div class="card-media">
+                            <img src="./img/12.png" alt="Analytics" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="view-project" onclick="openModal(3); return false;">
+                                    View Case Study <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h3>Doctor's Business Website</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4 project-item" data-category="web">
+                    <div class="project-card" data-project="7">
+                        <div class="card-media">
+                            <img src="./img/13.png" alt="Analytics" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="view-project" onclick="openModal(7); return false;">
+                                    View Case Study <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h3>Doctor's Business Website</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4 project-item" data-category="web">
+                    <div class="project-card" data-project="8">
+                        <div class="card-media">
+                            <img src="./img/14.png" alt="Analytics" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="view-project" onclick="openModal(8); return false;">
+                                    View Case Study <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h3>Bricklinks Marketing</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4 project-item" data-category="web">
+                    <div class="project-card" data-project="9">
+                        <div class="card-media">
+                            <img src="./img/15.png" alt="Analytics" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="view-project" onclick="openModal(9); return false;">
+                                    View Case Study <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h3>Full Plate Studio Marketing</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4 project-item" data-category="web">
+                    <div class="project-card" data-project="10">
+                        <div class="card-media">
+                            <img src="./img/2.png" alt="Analytics" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="view-project" onclick="openModal(10); return false;">
+                                    View Case Study <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h3>Prime Tax Consultants Business Website</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4 project-item" data-category="web">
+                    <div class="project-card" data-project="11">
+                        <div class="card-media">
+                            <img src="./img/4.png" alt="Analytics" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="view-project" onclick="openModal(11); return false;">
+                                    View Case Study <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h3>SHMEDEX medical billing company</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4 project-item" data-category="web">
+                    <div class="project-card" data-project="12">
+                        <div class="card-media">
+                            <img src="./img/5.png" alt="Analytics" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="view-project" onclick="openModal(12); return false;">
+                                    View Case Study <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h3>Tibbi Health Care Clinic Website</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4 project-item" data-category="web">
+                    <div class="project-card" data-project="13">
+                        <div class="card-media">
+                            <img src="./img/6.png" alt="Analytics" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="view-project" onclick="openModal(13); return false;">
+                                    View Case Study <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h3>Intergrity Psychiatry Clinic Website</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4 project-item" data-category="web">
+                    <div class="project-card" data-project="14">
+                        <div class="card-media">
+                            <img src="./img/8.png" alt="Analytics" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="view-project" onclick="openModal(14); return false;">
+                                    View Case Study <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h3>CareAxis medical billing company</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4 project-item" data-category="web">
+                    <div class="project-card" data-project="15">
+                        <div class="card-media">
+                            <img src="./img/9.png" alt="Analytics" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="view-project" onclick="openModal(15); return false;">
+                                    View Case Study <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h3>Armor Psychiatry Clinic Website</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Graphic Design Projects -->
+                <div class="col-12 col-sm-6 col-lg-4 project-item" data-category="design">
+                    <div class="project-card" data-project="4">
+                        <div class="card-media">
+                            <img src="./SYNORASoL/tuesday.png" alt="Brand Identity" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="view-project" onclick="openModal(4); return false;">
+                                    View Case Study <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h3>Testimonial Post</h3>
+                            <div class="tech-tags">
+                                <span>Illustrator</span>
+                                <span>Photoshop</span>
+                                <span>After Effects</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4 project-item" data-category="design">
+                    <div class="project-card" data-project="5">
+                        <div class="card-media">
+                            <img src="./SYNORASoL/brand without synorsol.png" alt="UI/UX" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="view-project" onclick="openModal(5); return false;">
+                                    View Case Study <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h3>Importance of Marketing post</h3>
+                            <div class="tech-tags">
+                                <span>Figma</span>
+                                <span>ProtoPie</span>
+                                <span>Illustrator</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4 project-item" data-category="design">
+                    <div class="project-card" data-project="6">
+                        <div class="card-media">
+                            <img src="./SYNORASoL/we are hiring.png" alt="Social Media" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="view-project" onclick="openModal(6); return false;">
+                                    View Case Study <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h3>Hiring Post</h3>
+                            <div class="tech-tags">
+                                <span>Photoshop</span>
+                                <span>Premiere Pro</span>
+                                <span>Lightroom</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4 project-item" data-category="design">
+                    <div class="project-card" data-project="16">
+                        <div class="card-media">
+                            <img src="./SYNORASoL/thursday.png" alt="Social Media" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="view-project" onclick="openModal(16); return false;">
+                                    View Case Study <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h3>Testimonial Post</h3>
+                            <div class="tech-tags">
+                                <span>Photoshop</span>
+                                <span>Premiere Pro</span>
+                                <span>Lightroom</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4 project-item" data-category="design">
+                    <div class="project-card" data-project="17">
+                        <div class="card-media">
+                            <img src="./SYNORASoL/24-2-26.png" alt="Social Media" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="view-project" onclick="openModal(17); return false;">
+                                    View Case Study <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h3>Good Design post for brand synorasol</h3>
+                            <div class="tech-tags">
+                                <span>Photoshop</span>
+                                <span>Premiere Pro</span>
+                                <span>Lightroom</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4 project-item" data-category="design">
+                    <div class="project-card" data-project="18">
+                        <div class="card-media">
+                            <img src="./SYNORASoL/26-2-26.png" alt="Social Media" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="view-project" onclick="openModal(18); return false;">
+                                    View Case Study <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h3>Website development features</h3>
+                            <div class="tech-tags">
+                                <span>Photoshop</span>
+                                <span>Premiere Pro</span>
+                                <span>Lightroom</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4 project-item" data-category="design">
+                    <div class="project-card" data-project="19">
+                        <div class="card-media">
+                            <img src="./SYNORASoL/27-2-26.png" alt="Social Media" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="view-project" onclick="openModal(19); return false;">
+                                    View Case Study <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h3>Jummah Post</h3>
+                            <div class="tech-tags">
+                                <span>Photoshop</span>
+                                <span>Premiere Pro</span>
+                                <span>Lightroom</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4 project-item" data-category="design">
+                    <div class="project-card" data-project="20">
+                        <div class="card-media">
+                            <img src="./SYNORASoL/28-1-26.png" alt="Social Media" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="view-project" onclick="openModal(20); return false;">
+                                    View Case Study <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h3>Brand Without digital Marketing post</h3>
+                            <div class="tech-tags">
+                                <span>Photoshop</span>
+                                <span>Premiere Pro</span>
+                                <span>Lightroom</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4 project-item" data-category="design">
+                    <div class="project-card" data-project="21">
+                        <div class="card-media">
+                            <img src="./SYNORASoL/19-2-26.png" alt="Social Media" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="view-project" onclick="openModal(21); return false;">
+                                    View Case Study <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h3>What Makes Synorasol Different post</h3>
+                            <div class="tech-tags">
+                                <span>Photoshop</span>
+                                <span>Premiere Pro</span>
+                                <span>Lightroom</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section section-padding" id="skills">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Technical Expertise</h2>
+                <p class="subtitle">Comprehensive skills across development and design</p>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-lg-6" data-aos="fade-right">
+                    <div class="skill-category">
+                        <h3>Frontend Development</h3>
+                        <div class="skill-items">
+                            <div class="skill-item"><i class="fab fa-react"></i><span>React/Next.js</span></div>
+                            <div class="skill-item"><i class="fab fa-vuejs"></i><span>Vue.js</span></div>
+                            <div class="skill-item"><i class="fab fa-js"></i><span>JavaScript/TypeScript</span></div>
+                            <div class="skill-item"><i class="fab fa-bootstrap"></i><span>Bootstrap/Tailwind</span></div>
+                            <div class="skill-item"><i class="fas fa-cube"></i><span>Three.js/WebGL</span></div>
+                            <div class="skill-item"><i class="fas fa-code"></i><span>HTML5/CSS3</span></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Backend Development</h3>
+                        <div class="skill-items">
+                            <div class="skill-item"><i class="fab fa-node"></i><span>Node.js</span></div>
+                            <div class="skill-item"><i class="fab fa-python"></i><span>Python/Django</span></div>
+                            <div class="skill-item"><i class="fas fa-database"></i><span>MongoDB/PostgreSQL</span></div>
+                            <div class="skill-item"><i class="fas fa-cloud"></i><span>AWS/Firebase</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-6" data-aos="fade-left">
+                    <div class="skill-category">
+                        <h3>Graphic Design</h3>
+                        <div class="skill-items">
+                            <div class="skill-item"><i class="fas fa-paint-brush"></i><span>Adobe Illustrator</span></div>
+                            <div class="skill-item"><i class="fas fa-image"></i><span>Adobe Photoshop</span></div>
+                            <div class="skill-item"><i class="fas fa-video"></i><span>After Effects</span></div>
+                            <div class="skill-item"><i class="fas fa-mobile-alt"></i><span>Figma/Adobe XD</span></div>
+                            <div class="skill-item"><i class="fas fa-film"></i><span>Premiere Pro</span></div>
+                            <div class="skill-item"><i class="fas fa-camera"></i><span>Lightroom</span></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-category">
+                        <h3>Tools & Technologies</h3>
+                        <div class="skill-items">
+                            <div class="skill-item"><i class="fab fa-git-alt"></i><span>Git/GitHub</span></div>
+                            <div class="skill-item"><i class="fas fa-terminal"></i><span>Webpack/Vite</span></div>
+                            <div class="skill-item"><i class="fas fa-chart-line"></i><span>SEO/Analytics</span></div>
+                            <div class="skill-item"><i class="fas fa-tachometer-alt"></i><span>Performance Optimization</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Collaborations Section -->
+    <section class="collaborations-section section-padding" id="collaborations">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Medical & Scientific Partnerships</h2>
+                <p class="subtitle">Trusted by leading healthcare professionals worldwide</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="doctor-card">
+                        <div class="doctor-img">
+                            <img src="./img/about2-dr-picture.jpg" alt="Dr. Gertrude Igwe" loading="lazy">
+                        </div>
+                        <h4>Dr. Gertrude Igwe</h4>
+                        <p class="specialization">Mental Health Expert</p>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="doctor-card">
+                        <div class="doctor-img">
+                            <img src="./img/aboutpage-1.png" alt="Dr. IJEOMA ODUMODU" loading="lazy">
+                        </div>
+                        <h4>Dr. IJEOMA ODUMODU</h4>
+                        <p class="specialization">Nurse practitioner</p>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="doctor-card">
+                        <div class="doctor-img">
+                            <img src="./img/new4.jpg" alt="Dr. NICOLINE MBI KILLI" loading="lazy">
+                        </div>
+                        <h4>Dr. NICOLINE MBI KILLI</h4>
+                        <p class="specialization">Nurse practitioner</p>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+                    <div class="doctor-card">
+                        <div class="doctor-img">
+                            <img src="./img/doctor-1.jpg" alt="Dr. Tinuolu T. Shokunbi" loading="lazy">
+                        </div>
+                        <h4>Dr. Tinuolu T. Shokunbi</h4>
+                        <p class="specialization">DNP, MSN, FNP-BC, PMHNP-BC</p>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="500">
+                    <div class="doctor-card">
+                        <div class="doctor-img">
+                            <img src="./img/ahmed kwamj.jpg" alt="Dr. Ahmed Kawamj" loading="lazy">
+                        </div>
+                        <h4>Dr. Ahmed Kawamj</h4>
+                        <p class="specialization">Dermatology · Wellness Community</p>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="600">
+                    <div class="doctor-card">
+                        <div class="doctor-img">
+                            <img src="./img/tibbi.jpg" alt="Tibbi Health Care" loading="lazy">
+                        </div>
+                        <h4>Tibbi Health Care</h4>
+                        <p class="specialization">Healthcare Provider</p>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="700">
+                    <div class="doctor-card">
+                        <div class="doctor-img">
+                            <img src="./img/armor.jpg" alt="Armor Psychiatry" loading="lazy">
+                        </div>
+                        <h4>Armor Psychiatry</h4>
+                        <p class="specialization">Mental Health Services</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section section-padding">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Frequently Asked Questions</h2>
+                <p class="subtitle">Everything you need to know about working together</p>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8" data-aos="fade-up">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#faq1">
+                                    What's your typical project process?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    I follow a structured yet flexible approach: Discovery & Research → Strategy &
+                                    Planning → Design & Development → Testing & Refinement → Launch & Support. Each
+                                    phase includes client collaboration and feedback loops to ensure the final product
+                                    exceeds expectations.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#faq2">
+                                    How do you handle medical/healthcare projects?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Healthcare projects require special attention to HIPAA compliance, accessibility
+                                    (WCAG), and data security. I have extensive experience building HIPAA-compliant
+                                    applications, patient portals, and medical research platforms with enterprise-grade
+                                    security measures.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#faq3">
+                                    What technologies do you specialize in?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    I specialize in modern JavaScript frameworks (React, Vue, Next.js), Three.js for 3D
+                                    experiences, Node.js/Python for backend, and the full Adobe Creative Suite for
+                                    design. I'm always learning and incorporating new technologies to deliver
+                                    cutting-edge solutions.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#faq4">
+                                    How long does a typical project take?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Project timelines vary based on complexity: Simple websites (4-6 weeks), Complex web
+                                    applications (2-4 months), Enterprise solutions (3-6 months). I provide detailed
+                                    timelines during the discovery phase and maintain transparent communication
+                                    throughout.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#faq5">
+                                    Do you offer ongoing support after launch?
+                                </button>
+                            </h2>
+                            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Yes! I offer various maintenance and support packages including security updates,
+                                    performance monitoring, content updates, and feature enhancements. Long-term
+                                    partnerships are welcomed and encouraged for continuous improvement.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Modal -->
+    <div class="modal" id="projectModal">
+        <button class="close-modal" onclick="closeModal()"><i class="fas fa-times"></i></button>
+        <div class="modal-content" id="modalContent">
+            <!-- Content loaded dynamically -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
+                    <a class="footer-brand" href="#">Portfolio</a>
+                    <p class="footer-text">Creating exceptional digital experiences at the intersection of code and
+                        creativity.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-dribbble"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-behance"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-3 col-lg-2 mb-4 mb-md-0">
+                    <div class="footer-links">
+                        <h4>Explore</h4>
+                        <ul>
+                            <li><a href="#work">Work</a></li>
+                            <li><a href="#skills">Skills</a></li>
+                            <li><a href="#collaborations">Collaborations</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-3 col-lg-3 mb-4 mb-md-0">
+                    <div class="footer-links">
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="#">Web Development</a></li>
+                            <li><a href="#">Graphic Design</a></li>
+                            <li><a href="#">UI/UX Design</a></li>
+                            <li><a href="#">3D & Interactive</a></li>
+                            <li><a href="#">Medical Software</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-12 col-lg-3">
+                    <div class="footer-links">
+                        <h4>Contact</h4>
+                        <ul>
+                            <li><i class="fas fa-envelope me-2"></i> hello@digitalcraft.com</li>
+                            <li><i class="fas fa-phone me-2"></i> +1 (555) 123-4567</li>
+                            <li><i class="fas fa-map-marker-alt me-2"></i> San Francisco, CA</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 Digital Craft. All rights reserved. Designed & built with ❤️</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50,
+            disable: window.innerWidth < 768 // Disable on mobile for better performance
+        });
+
+        // ===== DARK MODE TOGGLE =====
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        const moonIcon = darkModeToggle.querySelector('.fa-moon');
+        const sunIcon = darkModeToggle.querySelector('.fa-sun');
+
+        // Check for saved preference
+        const savedMode = localStorage.getItem('darkMode');
+        if (savedMode === 'light') {
+            body.classList.remove('dark-mode');
+            body.classList.add('light-mode');
+            moonIcon.style.display = 'none';
+            sunIcon.style.display = 'inline-block';
+        }
+
+        darkModeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+                moonIcon.style.display = 'none';
+                sunIcon.style.display = 'inline-block';
+                localStorage.setItem('darkMode', 'light');
+            } else {
+                body.classList.remove('light-mode');
+                body.classList.add('dark-mode');
+                moonIcon.style.display = 'inline-block';
+                sunIcon.style.display = 'none';
+                localStorage.setItem('darkMode', 'dark');
+            }
+        });
+
+        // ===== CUSTOM CURSOR (DESKTOP ONLY) =====
+        if (window.innerWidth >= 992) {
+            const cursor = document.querySelector('.cursor');
+            const follower = document.querySelector('.cursor-follower');
+
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                follower.style.left = e.clientX + 'px';
+                follower.style.top = e.clientY + 'px';
+            });
+
+            document.addEventListener('mouseenter', () => {
+                cursor.style.opacity = '1';
+                follower.style.opacity = '1';
+            });
+
+            document.addEventListener('mouseleave', () => {
+                cursor.style.opacity = '0';
+                follower.style.opacity = '0';
+            });
+
+            // Hover effect on links and buttons
+            const hoverables = document.querySelectorAll('a, button, .project-card, .doctor-card, .skill-item, .social-link');
+            hoverables.forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                    follower.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                    follower.style.borderColor = 'var(--accent-secondary)';
+                });
+                item.addEventListener('mouseleave', () => {
+                    cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                    follower.style.transform = 'translate(-50%, -50%) scale(1)';
+                    follower.style.borderColor = 'var(--accent)';
+                });
+            });
+        }
+
+        // ===== 3D HERO BACKGROUND =====
+        const container = document.getElementById('canvas-container');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        container.appendChild(renderer.domElement);
+
+        // Create floating geometric shapes
+        const shapes = [];
+        const colors = [0x8b5cf6, 0xec4899, 0x3b82f6, 0x10b981];
+
+        for (let i = 0; i < 30; i++) { // Reduced number of shapes for better performance
+            let geometry;
+            const rand = Math.random();
+
+            if (rand < 0.33) {
+                geometry = new THREE.IcosahedronGeometry(0.2 + Math.random() * 0.3, 0);
+            } else if (rand < 0.66) {
+                geometry = new THREE.TorusKnotGeometry(0.15, 0.05, 64, 8);
+            } else {
+                geometry = new THREE.OctahedronGeometry(0.2 + Math.random() * 0.3);
+            }
+
+            const material = new THREE.MeshStandardMaterial({
+                color: colors[Math.floor(Math.random() * colors.length)],
+                emissive: 0x1a1030,
+                roughness: 0.2,
+                metalness: 0.6,
+                transparent: true,
+                opacity: 0.3 + Math.random() * 0.4
+            });
+
+            const shape = new THREE.Mesh(geometry, material);
+
+            shape.position.x = (Math.random() - 0.5) * 20;
+            shape.position.y = (Math.random() - 0.5) * 20;
+            shape.position.z = (Math.random() - 0.5) * 20 - 10;
+
+            shape.rotation.x = Math.random() * Math.PI;
+            shape.rotation.y = Math.random() * Math.PI;
+
+            shape.userData = {
+                speedX: (Math.random() - 0.5) * 0.01,
+                speedY: (Math.random() - 0.5) * 0.01,
+                speedZ: (Math.random() - 0.5) * 0.01
+            };
+
+            scene.add(shape);
+            shapes.push(shape);
+        }
+
+        // Add ambient and point lights
+        const ambientLight = new THREE.AmbientLight(0x404060);
+        scene.add(ambientLight);
+
+        const light1 = new THREE.PointLight(0x8b5cf6, 1, 20);
+        light1.position.set(2, 3, 4);
+        scene.add(light1);
+
+        const light2 = new THREE.PointLight(0xec4899, 0.5, 20);
+        light2.position.set(-3, -1, 2);
+        scene.add(light2);
+
+        camera.position.z = 5;
+
+        // Animation
+        function animate() {
+            requestAnimationFrame(animate);
+
+            shapes.forEach(shape => {
+                shape.rotation.x += shape.userData.speedX;
+                shape.rotation.y += shape.userData.speedY;
+                shape.rotation.z += shape.userData.speedZ;
+            });
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Handle resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // ===== NAVBAR SCROLL EFFECT =====
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ===== GSAP ANIMATIONS (DISABLE ON MOBILE FOR PERFORMANCE) =====
+        if (window.innerWidth >= 768) {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Fade in cards on scroll
+            gsap.utils.toArray('.project-card').forEach((card, i) => {
+                gsap.fromTo(card,
+                    { y: 50, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        duration: 0.8,
+                        delay: i * 0.1,
+                        scrollTrigger: {
+                            trigger: card,
+                            start: "top bottom-=100",
+                            toggleActions: "play none none reverse"
+                        }
+                    }
+                );
+            });
+
+            // Parallax effect on hero
+            gsap.to('.hero-title', {
+                scrollTrigger: {
+                    trigger: '.hero',
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: true
+                },
+                y: 100,
+                opacity: 0.5
+            });
+        }
+
+        // ===== FILTER SYSTEM =====
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const projectItems = document.querySelectorAll('.project-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                projectItems.forEach(item => {
+                    const category = item.dataset.category;
+                    
+                    if (filterValue === 'all' || category === filterValue) {
+                        // Show item
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 10);
+                    } else {
+                        // Hide item
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.8)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // ===== MODAL SYSTEM =====
+        const modal = document.getElementById('projectModal');
+        const modalContent = document.getElementById('modalContent');
+
+        window.openModal = (projectId) => {
+            const projects = {
+                1: {
+                    title: 'Doctors Business Website',
+                    category: 'Web Development',
+                    description: 'A modern and professional website designed for a medical practice to enhance online presence and patient engagement.',
+                    challenge: 'The client needed a trustworthy, easy-to-navigate website that could showcase medical services, build credibility, and allow patients to book appointments online.',
+                    solution: 'Developed a responsive and SEO-optimized website with service pages, doctor profiles, appointment booking functionality, and a clean healthcare-focused UI design.',
+                    results: 'Increased patient inquiries by 60%, improved online visibility, and enhanced overall brand credibility.',
+                    technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'PHP', 'MySQL'],
+                    image: './img/10.png'
+                },
+
+                2: {
+                    title: 'Doctors Business Website',
+                    category: 'Web Development',
+                    description: 'A professional and patient-focused medical website designed to showcase services, doctor profiles, and streamline appointment bookings.',
+                    challenge: 'The clinic needed a clean, trustworthy online presence with easy navigation, fast performance, and a simple appointment scheduling system for patients.',
+                    solution: 'Built a fully responsive and SEO-optimized website with dedicated service pages, doctor information sections, online appointment booking, and WhatsApp integration for quick patient communication.',
+                    results: '70% increase in online appointment bookings, improved patient engagement, and stronger local search visibility.',
+                    technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'PHP', 'MySQL'],
+                    image: './img/11.png'
+                },
+                3: {
+                    title: 'Doctors Business Website',
+                    category: 'Web Development',
+                    description: 'A modern and responsive healthcare website designed to help medical professionals build credibility and connect with patients online.',
+                    challenge: 'The client required a secure, fast-loading, and mobile-friendly website that could clearly present medical services while allowing patients to book appointments easily.',
+                    solution: 'Developed a clean and user-friendly website with dedicated service sections, doctor profiles, online appointment forms, contact integration, and SEO optimization for better local visibility.',
+                    results: '50% growth in patient inquiries, improved Google rankings for local keywords, and enhanced brand trust.',
+                    technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'PHP', 'MySQL'],
+                    image: './img/12.png'
+                },
+                4: {
+                    title: 'Testimonial Post',
+                    category: 'Graphic Design',
+                    description: 'Complete brand identity redesign for a premium hospitality group.',
+                    challenge: 'Need to modernize the brand while maintaining its luxury heritage.',
+                    solution: 'Created a sophisticated visual system with custom typography and a refined color palette.',
+                    results: 'Brand recognition increased by 85% in target markets.',
+                    technologies: ['Illustrator', 'Photoshop', 'After Effects', 'InDesign'],
+                    image: './SYNORASoL/tuesday.png'
+                },
+                5: {
+                    title: 'Importance of Marketing post',
+                    category: 'Graphic Design',
+                    description: 'Patient-centric mobile app design for a telemedicine startup.',
+                    challenge: 'Create an intuitive interface that patients of all ages can use comfortably.',
+                    solution: 'Designed with accessibility in mind, using clear typography and intuitive navigation patterns.',
+                    results: '4.8/5 app store rating, 95% patient satisfaction score.',
+                    technologies: ['Figma', 'ProtoPie', 'Illustrator', 'Principle'],
+                    image: './SYNORASoL/brand without synorsol.png'
+                },
+                6: {
+                    title: 'Hiring Post',
+                    category: 'Graphic Design',
+                    description: 'Multi-platform social media.',
+                    challenge: 'Create consistent visual identity across different social platforms.',
+                    solution: 'Developed adaptable templates and motion graphics for each platform.',
+                    results: '2.5M impressions, 150% engagement rate above industry average.',
+                    technologies: ['Photoshop', 'Premiere Pro', 'Lightroom', 'After Effects'],
+                    image: './SYNORASoL/we are hiring.png'
+                },
+                7: {
+                    title: 'Doctors Business Website',
+                    category: 'Web Development',
+                    description: 'A modern and responsive healthcare website designed to help medical professionals build credibility and connect with patients online.',
+                    challenge: 'The client required a secure, fast-loading, and mobile-friendly website that could clearly present medical services while allowing patients to book appointments easily.',
+                    solution: 'Developed a clean and user-friendly website with dedicated service sections, doctor profiles, online appointment forms, contact integration, and SEO optimization for better local visibility.',
+                    results: '50% growth in patient inquiries, improved Google rankings for local keywords, and enhanced brand trust.',
+                    technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'PHP', 'MySQL'],
+                    image: './img/13.png'
+                },
+                8: {
+                    title: 'Bricklinks Marketing Website',
+                    category: 'Web Development',
+                    description: 'A high-converting digital marketing website designed to showcase services, case studies, and generate qualified leads for the agency.',
+                    challenge: 'The client needed a fast, visually engaging website that clearly communicated their marketing expertise while driving lead generation through strategic CTAs.',
+                    solution: 'Developed a modern, responsive website with service landing pages, portfolio sections, lead capture forms, and performance-optimized design focused on conversions.',
+                    results: '65% increase in lead generation, improved user engagement, and stronger online brand positioning.',
+                    technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'PHP', 'MySQL'],
+                    image: './img/14.png'
+                },
+                9: {
+                    title: 'FPS Marketing Website',
+                    category: 'Web Development',
+                    description: 'A high-converting digital marketing website designed to showcase services, case studies, and generate qualified leads for the agency.',
+                    challenge: 'The client needed a fast, visually engaging website that clearly communicated their marketing expertise while driving lead generation through strategic CTAs.',
+                    solution: 'Developed a modern, responsive website with service landing pages, portfolio sections, lead capture forms, and performance-optimized design focused on conversions.',
+                    results: '65% increase in lead generation, improved user engagement, and stronger online brand positioning.',
+                    technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'PHP', 'MySQL'],
+                    image: './img/15.png'
+                },
+                10: {
+                    title: 'Prime Tax Consultants Business Website',
+                    category: 'Web Development',
+                    description: 'A professional and trust-focused website developed for a tax consultancy firm to showcase accounting, tax advisory, and financial services.',
+                    challenge: 'The client required a secure, informative, and credibility-driven website that could clearly explain complex tax services while generating consultation inquiries.',
+                    solution: 'Built a responsive and SEO-optimized website with dedicated service pages, tax resource sections, consultation booking forms, and strong call-to-action placements to drive client conversions.',
+                    results: '55% increase in consultation requests, improved local search visibility, and enhanced client trust through professional branding.',
+                    technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'PHP', 'MySQL'],
+                    image: './img/2.png'
+                },
+                11: {
+                    title: 'SHMEDEX Medical Billing Company',
+                    category: 'Web Development',
+                    description: 'A professional and secure website developed for a medical billing company to showcase revenue cycle management and healthcare billing services.',
+                    challenge: 'The client needed a trustworthy and HIPAA-conscious online presence that clearly explained complex billing processes while generating leads from healthcare providers.',
+                    solution: 'Built a responsive and performance-optimized website with detailed service pages, compliance-focused messaging, lead capture forms, and strong call-to-actions tailored for clinics and hospitals.',
+                    results: '60% increase in qualified leads, improved credibility among healthcare providers, and stronger online visibility in the medical billing niche.',
+                    technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'PHP', 'MySQL'],
+                    image: './img/4.png'
+                },
+                12: {
+                    title: 'Tibbi Health Care Clinic Website',
+                    category: 'Web Development',
+                    description: 'A modern and patient-friendly website developed for Tibbi Health Care Clinic to showcase medical services, doctors, and streamline appointment bookings.',
+                    challenge: 'The clinic required a clean, trustworthy, and mobile-responsive website that could clearly present healthcare services while making it easy for patients to book appointments online.',
+                    solution: 'Designed and developed a responsive website with dedicated service pages, doctor profiles, appointment booking forms, contact integration, and SEO optimization for better local search visibility.',
+                    results: '45% increase in online appointment bookings, improved patient engagement, and stronger local brand presence.',
+                    technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'PHP', 'MySQL'],
+                    image: './img/5.png'
+                },
+                13: {
+                    title: 'Intergrity Psychiatry Clinic Website',
+                    category: 'Web Development',
+                    description: 'A modern and patient-friendly website developed for Tibbi Health Care Clinic to showcase medical services, doctors, and streamline appointment bookings.',
+                    challenge: 'The clinic required a clean, trustworthy, and mobile-responsive website that could clearly present healthcare services while making it easy for patients to book appointments online.',
+                    solution: 'Designed and developed a responsive website with dedicated service pages, doctor profiles, appointment booking forms, contact integration, and SEO optimization for better local search visibility.',
+                    results: '45% increase in online appointment bookings, improved patient engagement, and stronger local brand presence.',
+                    technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'PHP', 'MySQL'],
+                    image: './img/6.png'
+                },
+                14: {
+                    title: 'CareAxis Medical Billing Company',
+                    category: 'Web Development',
+                    description: 'A professional and secure website developed for a medical billing company to showcase revenue cycle management and healthcare billing services.',
+                    challenge: 'The client needed a trustworthy and HIPAA-conscious online presence that clearly explained complex billing processes while generating leads from healthcare providers.',
+                    solution: 'Built a responsive and performance-optimized website with detailed service pages, compliance-focused messaging, lead capture forms, and strong call-to-actions tailored for clinics and hospitals.',
+                    results: '60% increase in qualified leads, improved credibility among healthcare providers, and stronger online visibility in the medical billing niche.',
+                    technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'PHP', 'MySQL'],
+                    image: './img/8.png'
+                },
+                15: {
+                    title: 'Armor Psychiatry Clinic Website',
+                    category: 'Web Development',
+                    description: 'A modern and patient-friendly website developed for Tibbi Health Care Clinic to showcase medical services, doctors, and streamline appointment bookings.',
+                    challenge: 'The clinic required a clean, trustworthy, and mobile-responsive website that could clearly present healthcare services while making it easy for patients to book appointments online.',
+                    solution: 'Designed and developed a responsive website with dedicated service pages, doctor profiles, appointment booking forms, contact integration, and SEO optimization for better local search visibility.',
+                    results: '45% increase in online appointment bookings, improved patient engagement, and stronger local brand presence.',
+                    technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'PHP', 'MySQL'],
+                    image: './img/9.png'
+                },
+                16: {
+                    title: 'Testimonial Post',
+                    category: 'Graphic Design',
+                    description: 'Complete brand identity redesign for a premium hospitality group.',
+                    challenge: 'Need to modernize the brand while maintaining its luxury heritage.',
+                    solution: 'Created a sophisticated visual system with custom typography and a refined color palette.',
+                    results: 'Brand recognition increased by 85% in target markets.',
+                    technologies: ['Illustrator', 'Photoshop', 'After Effects', 'InDesign'],
+                    image: './SYNORASoL/thursday.png'
+                },
+                17: {
+                    title: 'Good Design Post for Synorasol Brand',
+                    category: 'Graphic Design',
+                    description: 'A high-impact social media design created for Synorasol to highlight modern branding and digital innovation.',
+                    challenge: 'The goal was to create a visually striking post that reflects Synorasol’s premium digital marketing identity while maintaining brand consistency.',
+                    solution: 'Designed a clean, bold composition using brand colors, strong typography hierarchy, and modern layout principles to maximize engagement and visual appeal.',
+                    results: 'Increased post engagement by 70%, improved brand recall, and strengthened Synorasol’s social media presence.',
+                    technologies: ['Adobe Illustrator', 'Adobe Photoshop', 'After Effects'],
+                    image: './SYNORASoL/24-2-26.png'
+                },
+                18: {
+                    title: 'Website development features',
+                    category: 'Graphic Design',
+                    description: 'A high-impact social media design created for Synorasol to highlight modern branding and digital innovation.',
+                    challenge: 'The goal was to create a visually striking post that reflects Synorasol’s premium digital marketing identity while maintaining brand consistency.',
+                    solution: 'Designed a clean, bold composition using brand colors, strong typography hierarchy, and modern layout principles to maximize engagement and visual appeal.',
+                    results: 'Increased post engagement by 70%, improved brand recall, and strengthened Synorasol’s social media presence.',
+                    technologies: ['Adobe Illustrator', 'Adobe Photoshop', 'After Effects'],
+                    image: './SYNORASoL/26-2-26.png'
+                },
+                19: {
+                    title: 'Jummah Post',
+                    category: 'Graphic Design',
+                    description: 'A spiritually inspired social media post designed to share Jummah blessings and engage the Muslim community with meaningful visuals.',
+                    challenge: 'The objective was to create a respectful, elegant, and visually calming design that reflects the spiritual importance of Jummah while maintaining brand identity.',
+                    solution: 'Designed a balanced composition using Islamic-inspired typography, soft gradients, and a harmonious color palette to convey peace, reflection, and positivity.',
+                    results: 'Boosted audience engagement, increased shares within the community, and strengthened emotional connection with followers.',
+                    technologies: ['Adobe Illustrator', 'Adobe Photoshop'],
+                    image: './SYNORASoL/27-2-26.png'
+                },
+                20: {
+                    title: 'Brand Without digital Marketing post',
+                    category: 'Graphic Design',
+                    description: 'A high-impact social media design created for Synorasol to highlight modern branding and digital innovation.',
+                    challenge: 'The goal was to create a visually striking post that reflects Synorasol’s premium digital marketing identity while maintaining brand consistency.',
+                    solution: 'Designed a clean, bold composition using brand colors, strong typography hierarchy, and modern layout principles to maximize engagement and visual appeal.',
+                    results: 'Increased post engagement by 70%, improved brand recall, and strengthened Synorasol’s social media presence.',
+                    technologies: ['Adobe Illustrator', 'Adobe Photoshop', 'After Effects'],
+                    image: './SYNORASoL/28-1-26.png'
+                },
+                21: {
+                    title: 'What Makes Synorasol Different post',
+                    category: 'Graphic Design',
+                    description: 'A high-impact social media design created for Synorasol to highlight modern branding and digital innovation.',
+                    challenge: 'The goal was to create a visually striking post that reflects Synorasol’s premium digital marketing identity while maintaining brand consistency.',
+                    solution: 'Designed a clean, bold composition using brand colors, strong typography hierarchy, and modern layout principles to maximize engagement and visual appeal.',
+                    results: 'Increased post engagement by 70%, improved brand recall, and strengthened Synorasol’s social media presence.',
+                    technologies: ['Adobe Illustrator', 'Adobe Photoshop', 'After Effects'],
+                    image: './SYNORASoL/19-2-26.png'
+                }
+            };
+
+            const project = projects[projectId];
+
+            modalContent.innerHTML = `
+                <div class="row">
+                    <div class="col-12 col-lg-8">
+                        <img src="${project.image}" alt="${project.title}" class="img-fluid rounded-4 mb-4" style="width: 100%;" loading="lazy">
+                    </div>
+                    <div class="col-12 col-lg-4">
+                        <h2 class="mb-3" style="font-size: 1.8rem; @media (min-width: 768px) { font-size: 2.5rem; }">${project.title}</h2>
+                        <p class="text-secondary mb-4">${project.category}</p>
+                        
+                        <div class="mb-4">
+                            <h5 class="mb-3">Description</h5>
+                            <p class="text-secondary">${project.description}</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5 class="mb-3">Challenge</h5>
+                            <p class="text-secondary">${project.challenge}</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5 class="mb-3">Solution</h5>
+                            <p class="text-secondary">${project.solution}</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5 class="mb-3">Results</h5>
+                            <p class="text-secondary">${project.results}</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5 class="mb-3">Technologies Used</h5>
+                            <div class="d-flex flex-wrap gap-2">
+                                ${project.technologies.map(tech => `<span class="tech-tags" style="background: rgba(139, 92, 246, 0.1); padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.8rem;">${tech}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+
+        window.closeModal = () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        };
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // ===== SMOOTH SCROLL FOR NAVIGATION =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ===== INITIAL FILTER ACTIVATION =====
+        // Show all projects initially
+        projectItems.forEach(item => {
+            item.style.display = 'block';
+            item.style.opacity = '1';
+            item.style.transform = 'scale(1)';
+        });
+
+        // Fix for filter buttons on mobile - ensure categories are correct
+        console.log('Filter system initialized');
+        console.log('Project categories:', Array.from(projectItems).map(item => item.dataset.category));
+    </script>
+</body>
+
+</html>
