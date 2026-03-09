@@ -689,6 +689,38 @@
             transform: translateX(5px);
         }
 
+        /* Live Demo Button */
+        .live-demo-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            margin-top: 1rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .live-demo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px var(--accent);
+            color: white;
+        }
+
+        .live-demo-btn i {
+            transition: transform 0.3s;
+        }
+
+        .live-demo-btn:hover i {
+            transform: translateX(5px);
+        }
+
         /* ===== SKILLS SECTION ===== */
         .skills-section {
             background: var(--bg-secondary);
@@ -1249,33 +1281,100 @@
             margin-right: -0.5rem;
         }
 
-        .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12,
-        .col, .col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12,
-        .col-sm, .col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12,
-        .col-md, .col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12,
-        .col-lg, .col-lg-auto, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12,
-        .col-xl, .col-xl-auto {
+        .col-1,
+        .col-2,
+        .col-3,
+        .col-4,
+        .col-5,
+        .col-6,
+        .col-7,
+        .col-8,
+        .col-9,
+        .col-10,
+        .col-11,
+        .col-12,
+        .col,
+        .col-auto,
+        .col-sm-1,
+        .col-sm-2,
+        .col-sm-3,
+        .col-sm-4,
+        .col-sm-5,
+        .col-sm-6,
+        .col-sm-7,
+        .col-sm-8,
+        .col-sm-9,
+        .col-sm-10,
+        .col-sm-11,
+        .col-sm-12,
+        .col-sm,
+        .col-sm-auto,
+        .col-md-1,
+        .col-md-2,
+        .col-md-3,
+        .col-md-4,
+        .col-md-5,
+        .col-md-6,
+        .col-md-7,
+        .col-md-8,
+        .col-md-9,
+        .col-md-10,
+        .col-md-11,
+        .col-md-12,
+        .col-md,
+        .col-md-auto,
+        .col-lg-1,
+        .col-lg-2,
+        .col-lg-3,
+        .col-lg-4,
+        .col-lg-5,
+        .col-lg-6,
+        .col-lg-7,
+        .col-lg-8,
+        .col-lg-9,
+        .col-lg-10,
+        .col-lg-11,
+        .col-lg-12,
+        .col-lg,
+        .col-lg-auto,
+        .col-xl-1,
+        .col-xl-2,
+        .col-xl-3,
+        .col-xl-4,
+        .col-xl-5,
+        .col-xl-6,
+        .col-xl-7,
+        .col-xl-8,
+        .col-xl-9,
+        .col-xl-10,
+        .col-xl-11,
+        .col-xl-12,
+        .col-xl,
+        .col-xl-auto {
             padding-left: 0.5rem;
             padding-right: 0.5rem;
         }
 
-        .g-4, .gy-4 {
+        .g-4,
+        .gy-4 {
             --bs-gutter-y: 1rem;
         }
 
         @media (min-width: 768px) {
-            .g-4, .gy-4 {
+
+            .g-4,
+            .gy-4 {
                 --bs-gutter-y: 1.5rem;
             }
         }
 
         /* Touch-friendly tap targets */
-        button, 
-        a, 
-        .filter-btn, 
-        .project-card, 
-        .doctor-card, 
-        .skill-item, 
+        button,
+        a,
+        .filter-btn,
+        .project-card,
+        .doctor-card,
+        .skill-item,
         .social-link {
             touch-action: manipulation;
             -webkit-tap-highlight-color: transparent;
@@ -1283,6 +1382,7 @@
 
         /* Hide cursor on mobile */
         @media (max-width: 991px) {
+
             .cursor,
             .cursor-follower {
                 display: none;
@@ -1346,16 +1446,13 @@
         <div class="scroll-indicator">SCROLL</div>
     </section>
 
-    <!-- Filter Section -->
-    <section class="filter-section" id="work">
-        <div class="container">
-            <div class="filter-controls">
-                <button class="filter-btn active" data-filter="all">All Projects</button>
-                <button class="filter-btn" data-filter="web">Web Development</button>
-                <button class="filter-btn" data-filter="design">Graphic Design</button>
-            </div>
-        </div>
-    </section>
+    
+
+    <!--Projects-->
+    <div class="section-header" data-aos="fade-up">
+        <h2>Creative Work</h2>
+        <p class="subtitle">Selected work demonstrating my skills in development, design, and problem solving</p>
+    </div>
 
     <!-- Projects Grid -->
     <section class="projects-grid">
@@ -1743,6 +1840,51 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- SaaS Projects -->
+                <div class="col-12 col-sm-6 col-lg-4 project-item" data-category="saas">
+                    <div class="project-card" data-project="22">
+                        <div class="card-media">
+                            <img src="./img/saas1.png" alt="Analytics Dashboard" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="view-project" onclick="openModal(22); return false;">
+                                    View Case Study <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h3>MicroMarket</h3>
+                            <div class="tech-tags">
+                                <span>SaaS</span>
+                                <span>React</span>
+                                <span>Node.js</span>
+                                <span>MongoDB</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4 project-item" data-category="saas">
+                    <div class="project-card" data-project="23">
+                        <div class="card-media">
+                            <img src="./img/saas2.png" alt="Project Management" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="view-project" onclick="openModal(23); return false;">
+                                    View Case Study <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h3>QuickSolve</h3>
+                            <div class="tech-tags">
+                                <span>SaaS</span>
+                                <span>Vue.js</span>
+                                <span>Django</span>
+                                <span>PostgreSQL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1763,7 +1905,8 @@
                             <div class="skill-item"><i class="fab fa-react"></i><span>React/Next.js</span></div>
                             <div class="skill-item"><i class="fab fa-vuejs"></i><span>Vue.js</span></div>
                             <div class="skill-item"><i class="fab fa-js"></i><span>JavaScript/TypeScript</span></div>
-                            <div class="skill-item"><i class="fab fa-bootstrap"></i><span>Bootstrap/Tailwind</span></div>
+                            <div class="skill-item"><i class="fab fa-bootstrap"></i><span>Bootstrap/Tailwind</span>
+                            </div>
                             <div class="skill-item"><i class="fas fa-cube"></i><span>Three.js/WebGL</span></div>
                             <div class="skill-item"><i class="fas fa-code"></i><span>HTML5/CSS3</span></div>
                         </div>
@@ -1784,7 +1927,8 @@
                     <div class="skill-category">
                         <h3>Graphic Design</h3>
                         <div class="skill-items">
-                            <div class="skill-item"><i class="fas fa-paint-brush"></i><span>Adobe Illustrator</span></div>
+                            <div class="skill-item"><i class="fas fa-paint-brush"></i><span>Adobe Illustrator</span>
+                            </div>
                             <div class="skill-item"><i class="fas fa-image"></i><span>Adobe Photoshop</span></div>
                             <div class="skill-item"><i class="fas fa-video"></i><span>After Effects</span></div>
                             <div class="skill-item"><i class="fas fa-mobile-alt"></i><span>Figma/Adobe XD</span></div>
@@ -1799,7 +1943,8 @@
                             <div class="skill-item"><i class="fab fa-git-alt"></i><span>Git/GitHub</span></div>
                             <div class="skill-item"><i class="fas fa-terminal"></i><span>Webpack/Vite</span></div>
                             <div class="skill-item"><i class="fas fa-chart-line"></i><span>SEO/Analytics</span></div>
-                            <div class="skill-item"><i class="fas fa-tachometer-alt"></i><span>Performance Optimization</span></div>
+                            <div class="skill-item"><i class="fas fa-tachometer-alt"></i><span>Performance
+                                    Optimization</span></div>
                         </div>
                     </div>
                 </div>
@@ -2042,15 +2187,16 @@
                     <div class="footer-links">
                         <h4>Contact</h4>
                         <ul>
-                            <li><i class="fas fa-envelope me-2"></i> saadatta045@gmail.com</li>
-                            <li><i class="fas fa-phone me-2"></i> +92 3101908239</li>
+                            <li><i class="fas fa-envelope me-2"></i> hello@digitalcraft.com</li>
+                            <li><i class="fas fa-phone me-2"></i> +1 (555) 123-4567</li>
+                            <li><i class="fas fa-map-marker-alt me-2"></i> San Francisco, CA</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <p>&copy;All rights reserved. Designed & built with ❤️</p>
+                <p>&copy; 2024 Digital Craft. All rights reserved. Designed & built with ❤️</p>
             </div>
         </div>
     </footer>
@@ -2279,26 +2425,36 @@
         const filterBtns = document.querySelectorAll('.filter-btn');
         const projectItems = document.querySelectorAll('.project-item');
 
+        // Initial filter setup - make sure all items are visible
+        projectItems.forEach(item => {
+            item.style.display = 'block';
+            item.style.opacity = '1';
+            item.style.transform = 'scale(1)';
+        });
+
         filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+
                 // Remove active class from all buttons
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
 
                 const filterValue = btn.getAttribute('data-filter');
+                console.log('Filtering by:', filterValue); // Debug log
 
                 projectItems.forEach(item => {
                     const category = item.dataset.category;
-                    
+
                     if (filterValue === 'all' || category === filterValue) {
-                        // Show item
+                        // Show item with animation
                         item.style.display = 'block';
                         setTimeout(() => {
                             item.style.opacity = '1';
                             item.style.transform = 'scale(1)';
                         }, 10);
                     } else {
-                        // Hide item
+                        // Hide item with animation
                         item.style.opacity = '0';
                         item.style.transform = 'scale(0.8)';
                         setTimeout(() => {
@@ -2306,6 +2462,12 @@
                         }, 300);
                     }
                 });
+
+                // Debug: Log counts
+                const visibleCount = Array.from(projectItems).filter(item =>
+                    filterValue === 'all' || item.dataset.category === filterValue
+                ).length;
+                console.log(`Visible items for ${filterValue}:`, visibleCount);
             });
         });
 
@@ -2316,35 +2478,37 @@
         window.openModal = (projectId) => {
             const projects = {
                 1: {
-                    title: 'Doctors Business Website',
+                    title: 'Doctor\'s Business Website',
                     category: 'Web Development',
                     description: 'A modern and professional website designed for a medical practice to enhance online presence and patient engagement.',
                     challenge: 'The client needed a trustworthy, easy-to-navigate website that could showcase medical services, build credibility, and allow patients to book appointments online.',
                     solution: 'Developed a responsive and SEO-optimized website with service pages, doctor profiles, appointment booking functionality, and a clean healthcare-focused UI design.',
                     results: 'Increased patient inquiries by 60%, improved online visibility, and enhanced overall brand credibility.',
                     technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'PHP', 'MySQL'],
-                    image: './img/10.png'
+                    image: './img/10.png',
+                    liveDemo: 'http://medicalmanagementagency.com/'
                 },
-
                 2: {
-                    title: 'Doctors Business Website',
+                    title: 'Doctor\'s Business Website',
                     category: 'Web Development',
                     description: 'A professional and patient-focused medical website designed to showcase services, doctor profiles, and streamline appointment bookings.',
                     challenge: 'The clinic needed a clean, trustworthy online presence with easy navigation, fast performance, and a simple appointment scheduling system for patients.',
                     solution: 'Built a fully responsive and SEO-optimized website with dedicated service pages, doctor information sections, online appointment booking, and WhatsApp integration for quick patient communication.',
                     results: '70% increase in online appointment bookings, improved patient engagement, and stronger local search visibility.',
                     technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'PHP', 'MySQL'],
-                    image: './img/11.png'
+                    image: './img/11.png',
+                    liveDemo: 'https://hopepsychiatrypllc.com/'
                 },
                 3: {
-                    title: 'Doctors Business Website',
+                    title: 'Doctor\'s Business Website',
                     category: 'Web Development',
                     description: 'A modern and responsive healthcare website designed to help medical professionals build credibility and connect with patients online.',
                     challenge: 'The client required a secure, fast-loading, and mobile-friendly website that could clearly present medical services while allowing patients to book appointments easily.',
                     solution: 'Developed a clean and user-friendly website with dedicated service sections, doctor profiles, online appointment forms, contact integration, and SEO optimization for better local visibility.',
                     results: '50% growth in patient inquiries, improved Google rankings for local keywords, and enhanced brand trust.',
                     technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'PHP', 'MySQL'],
-                    image: './img/12.png'
+                    image: './img/12.png',
+                    liveDemo: 'https://rosacaremedical.com/'
                 },
                 4: {
                     title: 'Testimonial Post',
@@ -2377,14 +2541,15 @@
                     image: './SYNORASoL/we are hiring.png'
                 },
                 7: {
-                    title: 'Doctors Business Website',
+                    title: 'Doctor\'s Business Website',
                     category: 'Web Development',
                     description: 'A modern and responsive healthcare website designed to help medical professionals build credibility and connect with patients online.',
                     challenge: 'The client required a secure, fast-loading, and mobile-friendly website that could clearly present medical services while allowing patients to book appointments easily.',
                     solution: 'Developed a clean and user-friendly website with dedicated service sections, doctor profiles, online appointment forms, contact integration, and SEO optimization for better local visibility.',
                     results: '50% growth in patient inquiries, improved Google rankings for local keywords, and enhanced brand trust.',
                     technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'PHP', 'MySQL'],
-                    image: './img/13.png'
+                    image: './img/13.png',
+                    liveDemo: 'https://saaad045.github.io/MD-NOW-CLINIC-LLC/'
                 },
                 8: {
                     title: 'Bricklinks Marketing Website',
@@ -2394,17 +2559,19 @@
                     solution: 'Developed a modern, responsive website with service landing pages, portfolio sections, lead capture forms, and performance-optimized design focused on conversions.',
                     results: '65% increase in lead generation, improved user engagement, and stronger online brand positioning.',
                     technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'PHP', 'MySQL'],
-                    image: './img/14.png'
+                    image: './img/14.png',
+                    liveDemo: 'https://saaad045.github.io/bricklinks/'
                 },
                 9: {
-                    title: 'FPS Marketing Website',
+                    title: 'Full Plate Studio Marketing',
                     category: 'Web Development',
                     description: 'A high-converting digital marketing website designed to showcase services, case studies, and generate qualified leads for the agency.',
                     challenge: 'The client needed a fast, visually engaging website that clearly communicated their marketing expertise while driving lead generation through strategic CTAs.',
                     solution: 'Developed a modern, responsive website with service landing pages, portfolio sections, lead capture forms, and performance-optimized design focused on conversions.',
                     results: '65% increase in lead generation, improved user engagement, and stronger online brand positioning.',
                     technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'PHP', 'MySQL'],
-                    image: './img/15.png'
+                    image: './img/15.png',
+                    liveDemo: 'https://saaad045.github.io/FPS_NEW/'
                 },
                 10: {
                     title: 'Prime Tax Consultants Business Website',
@@ -2414,7 +2581,8 @@
                     solution: 'Built a responsive and SEO-optimized website with dedicated service pages, tax resource sections, consultation booking forms, and strong call-to-action placements to drive client conversions.',
                     results: '55% increase in consultation requests, improved local search visibility, and enhanced client trust through professional branding.',
                     technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'PHP', 'MySQL'],
-                    image: './img/2.png'
+                    image: './img/2.png',
+                    liveDemo: 'https://primetaxconsultancy.com/index'
                 },
                 11: {
                     title: 'SHMEDEX Medical Billing Company',
@@ -2424,7 +2592,8 @@
                     solution: 'Built a responsive and performance-optimized website with detailed service pages, compliance-focused messaging, lead capture forms, and strong call-to-actions tailored for clinics and hospitals.',
                     results: '60% increase in qualified leads, improved credibility among healthcare providers, and stronger online visibility in the medical billing niche.',
                     technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'PHP', 'MySQL'],
-                    image: './img/4.png'
+                    image: './img/4.png',
+                    liveDemo: 'https://shmedex.com/'
                 },
                 12: {
                     title: 'Tibbi Health Care Clinic Website',
@@ -2434,17 +2603,19 @@
                     solution: 'Designed and developed a responsive website with dedicated service pages, doctor profiles, appointment booking forms, contact integration, and SEO optimization for better local search visibility.',
                     results: '45% increase in online appointment bookings, improved patient engagement, and stronger local brand presence.',
                     technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'PHP', 'MySQL'],
-                    image: './img/5.png'
+                    image: './img/5.png',
+                    liveDemo: 'https://tibbihealth.com/'
                 },
                 13: {
-                    title: 'Intergrity Psychiatry Clinic Website',
+                    title: 'Integrity Psychiatry Clinic Website',
                     category: 'Web Development',
                     description: 'A modern and patient-friendly website developed for Tibbi Health Care Clinic to showcase medical services, doctors, and streamline appointment bookings.',
                     challenge: 'The clinic required a clean, trustworthy, and mobile-responsive website that could clearly present healthcare services while making it easy for patients to book appointments online.',
                     solution: 'Designed and developed a responsive website with dedicated service pages, doctor profiles, appointment booking forms, contact integration, and SEO optimization for better local search visibility.',
                     results: '45% increase in online appointment bookings, improved patient engagement, and stronger local brand presence.',
                     technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'PHP', 'MySQL'],
-                    image: './img/6.png'
+                    image: './img/6.png',
+                    liveDemo: 'https://integritypsychiatry.org/'
                 },
                 14: {
                     title: 'CareAxis Medical Billing Company',
@@ -2454,7 +2625,8 @@
                     solution: 'Built a responsive and performance-optimized website with detailed service pages, compliance-focused messaging, lead capture forms, and strong call-to-actions tailored for clinics and hospitals.',
                     results: '60% increase in qualified leads, improved credibility among healthcare providers, and stronger online visibility in the medical billing niche.',
                     technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'PHP', 'MySQL'],
-                    image: './img/8.png'
+                    image: './img/8.png',
+                    liveDemo: 'https://careaxisus.com/'
                 },
                 15: {
                     title: 'Armor Psychiatry Clinic Website',
@@ -2464,7 +2636,8 @@
                     solution: 'Designed and developed a responsive website with dedicated service pages, doctor profiles, appointment booking forms, contact integration, and SEO optimization for better local search visibility.',
                     results: '45% increase in online appointment bookings, improved patient engagement, and stronger local brand presence.',
                     technologies: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'PHP', 'MySQL'],
-                    image: './img/9.png'
+                    image: './img/9.png',
+                    liveDemo: 'https://armorpsychiatry.com/'
                 },
                 16: {
                     title: 'Testimonial Post',
@@ -2487,7 +2660,7 @@
                     image: './SYNORASoL/24-2-26.png'
                 },
                 18: {
-                    title: 'Website development features',
+                    title: 'Website Development Features',
                     category: 'Graphic Design',
                     description: 'A high-impact social media design created for Synorasol to highlight modern branding and digital innovation.',
                     challenge: 'The goal was to create a visually striking post that reflects Synorasol’s premium digital marketing identity while maintaining brand consistency.',
@@ -2507,7 +2680,7 @@
                     image: './SYNORASoL/27-2-26.png'
                 },
                 20: {
-                    title: 'Brand Without digital Marketing post',
+                    title: 'Brand Without Digital Marketing Post',
                     category: 'Graphic Design',
                     description: 'A high-impact social media design created for Synorasol to highlight modern branding and digital innovation.',
                     challenge: 'The goal was to create a visually striking post that reflects Synorasol’s premium digital marketing identity while maintaining brand consistency.',
@@ -2517,7 +2690,7 @@
                     image: './SYNORASoL/28-1-26.png'
                 },
                 21: {
-                    title: 'What Makes Synorasol Different post',
+                    title: 'What Makes Synorasol Different Post',
                     category: 'Graphic Design',
                     description: 'A high-impact social media design created for Synorasol to highlight modern branding and digital innovation.',
                     challenge: 'The goal was to create a visually striking post that reflects Synorasol’s premium digital marketing identity while maintaining brand consistency.',
@@ -2525,10 +2698,35 @@
                     results: 'Increased post engagement by 70%, improved brand recall, and strengthened Synorasol’s social media presence.',
                     technologies: ['Adobe Illustrator', 'Adobe Photoshop', 'After Effects'],
                     image: './SYNORASoL/19-2-26.png'
+                },
+                22: {
+                    title: 'MicroMarket',
+                    category: 'SaaS',
+                    description: 'The ultimate student marketplace where innovators showcase ideas, collaborate globally, and access high-intensity digital services crafted with precision.',
+                    challenge: 'Students and young innovators often struggle to find a trusted platform where they can showcase projects, connect with like-minded creators, and access professional digital services.',
+                    solution: 'Built a scalable student-focused SaaS marketplace that enables students to present their ideas, collaborate with global innovators, and access curated digital services including design, development, and marketing.',
+                    results: 'Created a collaborative ecosystem connecting student innovators worldwide, helping them gain visibility, build partnerships, and turn ideas into impactful digital solutions.',
+                    technologies: ['React', 'Node.js', 'MongoDB', 'Stripe', 'AWS'],
+                    image: './img/saas1.png',
+                    liveDemo: 'https://trae000015hyz.vercel.app/'
+                },
+                23: {
+                    title: 'QuickSolve',
+                    category: 'SaaS',
+                    description: 'Accepting New Experts — Join an elite network of developers, designers, and problem solvers. Help others overcome blockers and get paid for your time on your own schedule.',
+                    challenge: 'Many skilled professionals struggle to monetize their expertise efficiently, while individuals and startups often face technical blockers without quick access to the right experts.',
+                    solution: 'Developed a SaaS platform that connects users with vetted experts in development, design, and tech consulting. The platform enables real-time problem solving, secure payments, and flexible scheduling for expert sessions.',
+                    results: 'Created a dynamic expert marketplace enabling professionals to earn from their knowledge while helping startups and creators solve technical challenges quickly and efficiently.',
+                    technologies: ['Vue.js', 'Django', 'PostgreSQL', 'Redis', 'Docker'],
+                    image: './img/saas2.png',
+                    liveDemo: 'https://traeiru3tujs.vercel.app/'
                 }
             };
 
             const project = projects[projectId];
+            
+            // Check if project category should have live demo button (web or saas)
+            const hasLiveDemo = project.category === 'Web Development' || project.category === 'SaaS';
 
             modalContent.innerHTML = `
                 <div class="row">
@@ -2565,6 +2763,14 @@
                                 ${project.technologies.map(tech => `<span class="tech-tags" style="background: rgba(139, 92, 246, 0.1); padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.8rem;">${tech}</span>`).join('')}
                             </div>
                         </div>
+                        
+                        ${hasLiveDemo ? `
+                        <div class="mt-4">
+                            <a href="${project.liveDemo}" target="_blank" class="live-demo-btn">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
+                        ` : ''}
                     </div>
                 </div>
             `;
@@ -2614,11 +2820,10 @@
             item.style.transform = 'scale(1)';
         });
 
-        // Fix for filter buttons on mobile - ensure categories are correct
+        // Fix for filter buttons - ensure categories are correct
         console.log('Filter system initialized');
         console.log('Project categories:', Array.from(projectItems).map(item => item.dataset.category));
     </script>
 </body>
-
 
 </html>
