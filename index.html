@@ -1446,7 +1446,7 @@
         <div class="scroll-indicator">SCROLL</div>
     </section>
 
-    
+
 
     <!--Projects-->
     <div class="section-header" data-aos="fade-up">
@@ -1885,6 +1885,28 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="col-12 col-sm-6 col-lg-4 project-item" data-category="saas">
+                    <div class="project-card" data-project="23">
+                        <div class="card-media">
+                            <img src="./img/saas3.png" alt="Project Management" loading="lazy">
+                            <div class="card-overlay">
+                                <a href="#" class="view-project" onclick="openModal(24); return false;">
+                                    View Case Study <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-info">
+                            <h3>SmartInvoice</h3>
+                            <div class="tech-tags">
+                                <span>SaaS</span>
+                                <span>React</span>
+                                <span>Django</span>
+                                <span>PostgreSQL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -2187,15 +2209,16 @@
                     <div class="footer-links">
                         <h4>Contact</h4>
                         <ul>
-                            <li><i class="fas fa-envelope me-2"></i> Saadatta045@gmail.com</li>
-                            <li><i class="fas fa-phone me-2"></i> +92 3101 908239</li>
+                            <li><i class="fas fa-envelope me-2"></i> hello@digitalcraft.com</li>
+                            <li><i class="fas fa-phone me-2"></i> +1 (555) 123-4567</li>
+                            <li><i class="fas fa-map-marker-alt me-2"></i> San Francisco, CA</li>
                         </ul>
                     </div>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; All rights reserved. Designed & built with ❤️</p>
+                <p>&copy; 2024 Digital Craft. All rights reserved. Designed & built with ❤️</p>
             </div>
         </div>
     </footer>
@@ -2719,11 +2742,22 @@
                     technologies: ['Vue.js', 'Django', 'PostgreSQL', 'Redis', 'Docker'],
                     image: './img/saas2.png',
                     liveDemo: 'https://traeiru3tujs.vercel.app/'
+                },
+                24: {
+                    title: 'SmartInvoice',
+                    category: 'SaaS',
+                    description: 'An all-in-one financial management platform designed for freelancers and small businesses to easily create invoices, track expenses, and monitor financial performance in real time.',
+                    challenge: 'Freelancers and small businesses often struggle with managing invoices, tracking expenses, and maintaining clear financial insights using scattered or complex tools.',
+                    solution: 'Developed a SaaS platform that centralizes invoicing, expense tracking, and financial analytics into a single intuitive dashboard. It enables users to manage cash flow efficiently, automate processes, and gain real-time insights into their business performance.',
+                    results: 'Delivered a streamlined financial solution that improves productivity, reduces manual work, and helps users make smarter financial decisions with better visibility and control.',
+                    technologies: ['React', 'Django', 'PostgreSQL', 'Redis', 'Docker'],
+                    image: './img/saas3.png',
+                    liveDemo: 'https://traesmartinvoice-suite-main6q33.vercel.app/'
                 }
             };
 
             const project = projects[projectId];
-            
+
             // Check if project category should have live demo button (web or saas)
             const hasLiveDemo = project.category === 'Web Development' || project.category === 'SaaS';
 
@@ -2826,5 +2860,3 @@
 </body>
 
 </html>
-
-
